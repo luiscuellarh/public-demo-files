@@ -1,0 +1,52 @@
+---
+openapi: "3.0.0"
+info:
+  description: "OpenAPI Specification for the Apigee ouuth target service endpoint."
+  version: "1.0.0"
+  title: "Mock Target API"
+  
+paths:
+  /accesstoken:
+    post:
+      security:
+      - OAuth2: []
+      summary: "Get Access Token"
+      operationId: "Get Access Token"
+      description: "Get Access Token"
+      parameters:
+      - name: "grant_type"
+        in: "query"
+        description: "Your user name."
+        required: true
+        schema:
+          type: "string"
+        
+      responses:
+        "200":
+          description: "Success"
+  /refresh_accesstoken:
+    post:
+      security:
+      - OAuth2: []
+      summary: "Refresh Access Token"
+      operationId: "Refresh Access Token"
+      description: "Refresh Access Token"
+      responses:
+        "200":
+          description: "Success"
+
+servers:
+- url: "https://35-241-29-146.nip.io/oauth/client_credential"
+components:
+  securitySchemes:
+
+    OAuth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://35-241-29-146.nip.io/oauth/client_credential/accesstoken
+          scopes:
+            echo: Grants echo access
+            ip: Grants help access
+            help: Grants ip to admin operations
+
